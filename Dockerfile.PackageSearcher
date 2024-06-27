@@ -1,0 +1,17 @@
+# ベースイメージを指定
+FROM python:3.10
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# プロジェクトファイルをコンテナにコピー
+COPY . /app
+
+# 必要なPythonパッケージをインストール
+RUN pip install ast
+
+# 依存関係を検出してインストールするスクリプトをコピー
+COPY detect_and_generate_requirements.py /app
+
+# スクリプトを実行してrequirements.txtを生成
+RUN python detect_and_generate_requirements.py
